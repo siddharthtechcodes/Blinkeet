@@ -1,0 +1,2045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BLINKEET: 10-Second Delivery or We Cry</title>
+  <meta name="description" content="India's fastest and most emotionally volatile 10-second grocery delivery app. Low prices, zero refunds, infinite emotional damage.">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            blinkYellow: '#FFE500',
+            blinkGreen: '#00E676',
+            blinkDarkGreen: '#0C831F',
+            blinkRed: '#FF1744',
+            blinkDark: '#111827',
+            blinkCard: '#FFFFFF',
+            blinkBorder: '#000000',
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+            display: ['Impact', 'Arial Black', 'sans-serif'],
+          },
+          boxShadow: {
+            brutal: '4px 4px 0px #000000',
+            'brutal-lg': '6px 6px 0px #000000',
+            'brutal-xl': '8px 8px 0px #000000',
+            'brutal-sm': '2px 2px 0px #000000',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    /* Neo-Brutalist & Blinkit Aesthetics */
+    :root {
+      --accent-yellow: #FFE500;
+      --toxic-green: #00E676;
+      --rage-red: #FF1744;
+      --card-bg: #FFFFFF;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background-color: #F8F9FA;
+      color: #111827;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      transition: filter 0.4s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    /* Screen Inversion & Upside Down Curses */
+    .screen-inverted {
+      filter: invert(1) hue-rotate(180deg) !important;
+    }
+    .screen-upside-down {
+      transform: rotate(180deg) !important;
+    }
+    .screen-tilted {
+      transform: rotate(-3deg) scale(0.98) !important;
+    }
+
+    /* Chaos Earthquake Shake */
+    @keyframes screenShake {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      20% { transform: translate(-5px, 6px) rotate(-1.5deg); }
+      40% { transform: translate(7px, -4px) rotate(1.2deg); }
+      60% { transform: translate(-8px, -5px) rotate(-2deg); }
+      80% { transform: translate(6px, 7px) rotate(1.8deg); }
+    }
+    .turbo-earthquake {
+      animation: screenShake 0.08s infinite !important;
+    }
+
+    /* Price Flicker Animation */
+    @keyframes priceGlitch {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      25% { opacity: 0.8; transform: scale(1.08) skewX(4deg); color: #FF1744; }
+      50% { opacity: 0.9; transform: scale(0.92); color: #0C831F; }
+      75% { opacity: 0.7; transform: scale(1.05) skewX(-4deg); color: #7C3AED; }
+    }
+    .price-flicker {
+      animation: priceGlitch 0.4s infinite;
+      display: inline-block;
+    }
+
+    /* Pulse Glow */
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 10px rgba(0, 230, 118, 0.6); }
+      50% { box-shadow: 0 0 25px rgba(255, 23, 68, 0.8); }
+    }
+    .glow-pulse {
+      animation: pulseGlow 1.5s infinite;
+    }
+
+    /* Tear Drop Particles */
+    .tear-particle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 99999;
+      font-size: 28px;
+      animation: tearFall 1.8s linear forwards;
+    }
+    @keyframes tearFall {
+      0% { transform: translateY(0) scale(0.8); opacity: 1; }
+      80% { opacity: 0.9; }
+      100% { transform: translateY(100vh) scale(1.2); opacity: 0; }
+    }
+
+    /* Floating Confetti of Trash & Emojis */
+    .trash-particle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 999999;
+      user-select: none;
+      animation: explodeFloat 2.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+    @keyframes explodeFloat {
+      0% { transform: translate(0, 0) rotate(0deg) scale(0.6); opacity: 1; }
+      100% { transform: translate(var(--tx), var(--ty)) rotate(var(--rot)) scale(1.4); opacity: 0; }
+    }
+
+    /* Watermark for Lay's */
+    .air-watermark {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-25deg);
+      background: rgba(255, 23, 68, 0.9);
+      color: #FFF;
+      font-weight: 900;
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border: 2px solid #000;
+      pointer-events: none;
+      box-shadow: 3px 3px 0px #000;
+      white-space: nowrap;
+      letter-spacing: 0.05em;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #FFE500;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #000;
+      border: 2px solid #FFE500;
+    }
+
+    /* Dodging Button Transition */
+    .dodging-btn {
+      transition: transform 0.12s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+    }
+
+    /* Blue Screen of Death */
+    #bsod-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background-color: #0000AA;
+      color: #FFFFFF;
+      font-family: 'Courier New', Courier, monospace;
+      z-index: 9999999;
+      padding: 40px;
+      user-select: none;
+    }
+
+    /* Mascot Speech Bubble tail */
+    .speech-bubble::after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      right: 35px;
+      border-width: 12px 12px 0;
+      border-style: solid;
+      border-color: #FFE500 transparent;
+      display: block;
+      width: 0;
+    }
+
+    /* Meme Flash Overlay */
+    #meme-flash-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999998;
+      background: rgba(0, 0, 0, 0.95);
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+  </style>
+</head>
+<body class="min-h-screen text-slate-900 pb-28 selection:bg-blinkYellow selection:text-black">
+
+  <!-- ==========================================
+       TOP ANNOUNCEMENT MARQUEE
+       ========================================== -->
+  <div class="bg-black text-blinkYellow font-bold text-xs md:text-sm py-2 px-4 border-b-2 border-black overflow-hidden flex items-center shadow-sm">
+    <div class="animate-pulse flex items-center gap-2 bg-blinkRed text-white px-2 py-0.5 rounded text-xs uppercase tracking-wider font-extrabold mr-4 flex-shrink-0">
+      <span class="inline-block w-2 h-2 rounded-full bg-white animate-ping"></span>
+      PANIC SALE
+    </div>
+    <div class="whitespace-nowrap overflow-hidden flex-1">
+      <div id="marquee-text" class="inline-block font-mono tracking-tight animate-marquee">
+        ⚡ 10-SECOND DELIVERY OR WE CALL YOUR MOTHER • 🚨 PRICE SURCHARGE: +$4.99 PER BLINK • 🥛 FREE MILK WITH PURCHASE OF 1,000 CRATES • 🚷 DELIVERY GUY WILL THROW GROCERIES THROUGH WINDOW • 💀 COURIER RESIGNED MID-TRANSIT • 🚨 DO NOT REFRESH PAGE OR YOUR CART BECOMES OUR PROPERTY
+      </div>
+    </div>
+    <div class="flex items-center gap-3 pl-4 flex-shrink-0">
+      <button id="audio-toggle-btn" class="flex items-center gap-1.5 bg-blinkYellow text-black px-2.5 py-0.5 rounded text-xs font-bold border border-black hover:bg-white active:scale-95 transition" title="Toggle Cursed Audio Synthesizer">
+        <span id="audio-icon">🔊</span>
+        <span id="audio-label">CHAOS AUDIO: ON</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       STICKY QUICK-COMMERCE HEADER
+       ========================================== -->
+  <header class="sticky top-0 z-50 bg-blinkYellow border-b-4 border-black px-3 md:px-8 py-3 shadow-brutal transition-all duration-200">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
+      
+      <!-- Brand & Timer Badge -->
+      <div class="flex items-center justify-between w-full md:w-auto gap-4">
+        <!-- Logo -->
+        <a href="#" onclick="triggerChaosEvent('logo'); return false;" class="flex items-center gap-2 group cursor-pointer select-none">
+          <div class="bg-black text-blinkYellow font-display text-2xl md:text-3xl tracking-tighter px-3 py-1 rounded-lg border-2 border-black transform group-hover:-rotate-3 group-hover:scale-105 transition-transform shadow-brutal-sm flex items-center gap-1">
+            <span>blinkeet</span>
+            <span class="text-blinkGreen text-xl animate-bounce">😭</span>
+          </div>
+          <div class="hidden sm:block leading-none">
+            <span class="text-[10px] font-black uppercase tracking-widest text-black bg-white px-1.5 py-0.5 rounded border border-black">10-SECOND DELIVERY</span>
+            <span class="block text-[9px] font-bold text-slate-800 italic mt-0.5">...or we cry loudly</span>
+          </div>
+        </a>
+
+        <!-- Cursed Delivery Timer Pill -->
+        <div id="delivery-timer-badge" class="bg-white border-2 border-black px-3 py-1.5 rounded-full flex items-center gap-2 shadow-brutal-sm cursor-pointer hover:bg-pink-50 transition" title="Click to accelerate delivery">
+          <span class="relative flex h-3 w-3">
+            <span id="timer-ping" class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blinkGreen opacity-75"></span>
+            <span id="timer-dot" class="relative inline-flex rounded-full h-3 w-3 bg-blinkDarkGreen"></span>
+          </span>
+          <div class="flex flex-col">
+            <span class="text-[9px] font-extrabold uppercase text-slate-500 leading-none">GUARANTEED TIME</span>
+            <span id="delivery-timer-text" class="text-xs md:text-sm font-black text-blinkDark leading-tight font-mono">⚡ 10 SECONDS</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Deceptive Search Bar with Auto-Scrambler -->
+      <div class="w-full md:flex-1 max-w-xl relative">
+        <div class="relative flex items-center">
+          <div class="absolute left-3 text-slate-400 pointer-events-none">
+            <svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </div>
+          <input 
+            type="text" 
+            id="search-input"
+            class="w-full pl-10 pr-24 py-2.5 bg-white border-2 border-black rounded-xl font-bold text-sm text-black placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blinkGreen shadow-brutal-sm transition-all"
+            placeholder="Search 'milk', 'eggs', 'mental peace'..."
+            autocomplete="off"
+            spellcheck="false"
+          >
+          <button id="search-btn" class="absolute right-1.5 bg-blinkGreen hover:bg-black hover:text-white text-black font-extrabold text-xs px-3 py-1.5 rounded-lg border border-black shadow-sm transition active:scale-95">
+            FIND NO
+          </button>
+        </div>
+
+        <!-- Cursed Search Results Dropdown -->
+        <div id="search-dropdown" class="hidden absolute top-full left-0 right-0 mt-2 bg-white border-3 border-black rounded-xl shadow-brutal-xl z-50 p-2 overflow-hidden">
+          <div class="text-[10px] font-black uppercase text-slate-400 px-3 py-1 border-b border-slate-200 flex justify-between">
+            <span>Did you mean to order this garbage?</span>
+            <span class="text-blinkRed">IN STOCK: ∞</span>
+          </div>
+          <div id="search-results-list" class="divide-y divide-slate-100">
+            <!-- Injected dynamically -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Header Actions (Location + Cart) -->
+      <div class="flex items-center gap-2.5 w-full md:w-auto justify-between md:justify-end">
+        <!-- Location Picker Trigger -->
+        <button id="location-picker-btn" class="flex items-center gap-1.5 bg-white hover:bg-yellow-100 text-black border-2 border-black px-3 py-2 rounded-xl text-xs font-bold shadow-brutal-sm active:scale-95 transition">
+          <span class="text-sm">📍</span>
+          <div class="text-left leading-tight">
+            <span class="text-[9px] uppercase text-slate-500 block font-extrabold">Deliver to</span>
+            <span id="current-location-text" class="text-xs font-black truncate max-w-[100px] md:max-w-[130px] block">404 No Hope St...</span>
+          </div>
+          <span class="text-xs">▼</span>
+        </button>
+
+        <!-- View Cart Button with Buzzer -->
+        <button id="view-cart-btn" class="flex items-center gap-2 bg-blinkDarkGreen hover:bg-green-700 text-white border-2 border-black px-4 py-2 rounded-xl font-black text-sm shadow-brutal active:scale-95 transition transform hover:-translate-y-0.5">
+          <svg class="w-5 h-5 text-blinkYellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+          </svg>
+          <span>MY CART</span>
+          <span id="cart-item-count-badge" class="bg-blinkYellow text-black font-black text-xs px-2 py-0.5 rounded-full border border-black animate-pulse">0</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ==========================================
+       HERO BANNER & PROMO TICKER
+       ========================================== -->
+  <section class="max-w-7xl mx-auto px-4 mt-4">
+    <div class="bg-gradient-to-r from-blinkYellow via-amber-300 to-blinkGreen border-3 border-black rounded-2xl p-4 md:p-6 shadow-brutal relative overflow-hidden">
+      <!-- Decorative background badges -->
+      <div class="absolute -right-8 -bottom-8 opacity-15 text-8xl font-black select-none pointer-events-none">
+        FAST
+      </div>
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4 relative z-10">
+        <div>
+          <div class="inline-flex items-center gap-2 bg-black text-blinkYellow text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider mb-2 border border-black">
+            <span>🔥 ZEALOUS DISRUPTION GUARANTEE</span>
+          </div>
+          <h1 class="text-2xl md:text-4xl font-extrabold tracking-tight text-black leading-tight">
+            Order in <span class="bg-black text-blinkYellow px-2 py-0.5 rounded">10 Seconds</span>, Regret for <span class="text-blinkRed underline decoration-wavy">10 Decades</span>.
+          </h1>
+          <p class="text-xs md:text-sm font-bold text-slate-800 mt-1 max-w-xl">
+            Our riders drive supersonic mopeds directly into your kitchen counter. If milk spills, we charge you for cleanup emotional trauma.
+          </p>
+        </div>
+        <div class="flex items-center gap-3">
+          <button onclick="triggerQuickChaos();" class="bg-blinkRed hover:bg-black text-white font-black text-xs md:text-sm px-5 py-3 rounded-xl border-2 border-black shadow-brutal hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition uppercase tracking-wider flex items-center gap-2">
+            <span>🎲 ROLL FOR RUIN</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       CATEGORY CHIPS (CURSED TAB LOGIC)
+       ========================================== -->
+  <section class="max-w-7xl mx-auto px-4 mt-6">
+    <div class="flex items-center justify-between mb-3">
+      <h2 class="text-sm font-extrabold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
+        <span>🛒 CATEGORIES</span>
+        <span class="text-[10px] bg-slate-200 px-2 py-0.5 rounded-full font-bold">(Click at your own peril)</span>
+      </h2>
+      <span class="text-xs font-bold text-blinkRed animate-pulse">⚠️ Clicking category may invert reality</span>
+    </div>
+
+    <!-- Category Buttons Grid / Scrollable Strip -->
+    <div class="flex items-center gap-2.5 overflow-x-auto pb-3 pt-1 scrollbar-none" id="categories-strip">
+      <button onclick="handleCategoryClick(this, 'all')" class="category-btn flex-shrink-0 flex items-center gap-2 bg-black text-white px-4 py-2 rounded-xl font-extrabold text-xs border-2 border-black shadow-brutal-sm hover:scale-105 active:scale-95 transition">
+        <span>✨</span> All Cursed Items
+      </button>
+      <button onclick="handleCategoryClick(this, 'dairy')" class="category-btn flex-shrink-0 flex items-center gap-2 bg-white text-black px-4 py-2 rounded-xl font-extrabold text-xs border-2 border-black shadow-brutal-sm hover:bg-blinkYellow active:scale-95 transition">
+        <span>🥛</span> Dairy & Regret
+      </button>
+      <button onclick="handleCategoryClick(this, 'veggies')" class="category-btn flex-shrink-0 flex items-center gap-2 bg-white text-black px-4 py-2 rounded-xl font-extrabold text-xs border-2 border-black shadow-brutal-sm hover:bg-blinkGreen active:scale-95 transition">
+        <span>🥦</span> Sad Vegetables
+      </button>
+      <button onclick="handleCategoryClick(this, 'snacks')" class="category-btn flex-shrink-0 flex items-center gap-2 bg-white text-black px-4 py-2 rounded-xl font-extrabold text-xs border-2 border-black shadow-brutal-sm hover:bg-pink-200 active:scale-95 transition">
+        <span>🍟</span> 95% Air Snacks
+      </button>
+      <button onclick="handleCategoryClick(this, 'noodles')" class="category-btn flex-shrink-0 flex items-center gap-2 bg-white text-black px-4 py-2 rounded-xl font-extrabold text-xs border-2 border-black shadow-brutal-sm hover:bg-amber-200 active:scale-95 transition">
+        <span>🍜</span> Instant Sadness
+      </button>
+      <button onclick="handleCategoryClick(this, 'drinks')" class="category-btn flex-shrink-0 flex items-center gap-2 bg-white text-black px-4 py-2 rounded-xl font-extrabold text-xs border-2 border-black shadow-brutal-sm hover:bg-blue-200 active:scale-95 transition">
+        <span>🥤</span> Acid Cold Drinks
+      </button>
+      <button onclick="handleCategoryClick(this, 'icecream')" class="category-btn flex-shrink-0 flex items-center gap-2 bg-white text-black px-4 py-2 rounded-xl font-extrabold text-xs border-2 border-black shadow-brutal-sm hover:bg-purple-200 active:scale-95 transition">
+        <span>🍦</span> Melted Despair
+      </button>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       MAIN GROCERY GRID (12 CURSED PRODUCT CARDS)
+       ========================================== -->
+  <main class="max-w-7xl mx-auto px-4 mt-4">
+    <div id="product-grid" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5">
+      
+      <!-- 1. AMUL COW MILK (Runaway Button + 999 Crates) -->
+      <div class="product-card group relative bg-white border-3 border-black rounded-2xl p-3.5 flex flex-col justify-between shadow-brutal hover:shadow-brutal-lg transition duration-150" data-category="dairy">
+        <div class="absolute top-2.5 left-2.5 z-10 bg-blinkGreen text-black text-[9px] font-black px-2 py-0.5 rounded border border-black uppercase">
+          10-SEC CHURN
+        </div>
+        <!-- Card Image -->
+        <div class="relative w-full h-36 bg-amber-50 rounded-xl border-2 border-black flex items-center justify-center overflow-hidden mb-3">
+          <!-- Milk SVG artwork -->
+          <div class="text-6xl group-hover:scale-110 transition transform">🥛</div>
+          <div class="absolute bottom-1 right-1 text-[8px] font-extrabold bg-white border border-black px-1 rounded">500 ml</div>
+        </div>
+        <!-- Info -->
+        <div>
+          <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Amul Pasteur-ish-ed</span>
+          <h3 class="font-black text-sm md:text-base text-black leading-tight">Amul Cow Milk 500ml</h3>
+          <p class="text-[11px] font-semibold text-slate-600 mt-0.5">Dodges the cursor because it respects its personal space.</p>
+        </div>
+        <!-- Price & Runaway Action -->
+        <div class="mt-4 pt-2.5 border-t border-slate-200 flex items-center justify-between relative min-h-[46px]">
+          <div>
+            <span class="text-xs text-slate-400 font-bold block leading-none">MRP</span>
+            <span class="text-base font-black text-black leading-none">$1.49</span>
+          </div>
+          <!-- DODGING RUNAWAY BUTTON -->
+          <div class="relative flex items-center justify-end w-24 h-10">
+            <button 
+              id="dodging-milk-btn" 
+              onmouseenter="dodgeButton(this)" 
+              onclick="addMilkChaos(this)" 
+              class="dodging-btn absolute right-0 bg-blinkYellow hover:bg-yellow-400 text-black font-black text-xs px-4 py-2 rounded-xl border-2 border-black shadow-brutal-sm active:scale-90 select-none z-20"
+            >
+              ADD
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. LAY'S CLASSIC SALTED (Upside down/Air sold separately + Negative Quantity) -->
+      <div class="product-card group relative bg-white border-3 border-black rounded-2xl p-3.5 flex flex-col justify-between shadow-brutal hover:shadow-brutal-lg transition duration-150" data-category="snacks">
+        <div class="absolute top-2.5 left-2.5 z-10 bg-blinkYellow text-black text-[9px] font-black px-2 py-0.5 rounded border border-black uppercase">
+          95% AIR
+        </div>
+        <!-- Card Image with Hover Invert -->
+        <div id="lays-img-container" class="relative w-full h-36 bg-yellow-100 rounded-xl border-2 border-black flex items-center justify-center overflow-hidden mb-3 transition-all duration-300 group-hover:rotate-180 group-hover:blur-[1px]">
+          <div class="text-6xl">🥔</div>
+          <div class="air-watermark">AIR SOLD SEPARATELY</div>
+          <div class="absolute bottom-1 right-1 text-[8px] font-extrabold bg-white border border-black px-1 rounded">50 g</div>
+        </div>
+        <!-- Info -->
+        <div>
+          <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Lay's Nitrogen</span>
+          <h3 class="font-black text-sm md:text-base text-black leading-tight">Lay's Classic Salted</h3>
+          <p class="text-[11px] font-semibold text-slate-600 mt-0.5">Clicking '+' decrements into negative inventory you owe us.</p>
+        </div>
+        <!-- Price & Negative Quantity Controller -->
+        <div class="mt-4 pt-2.5 border-t border-slate-200 flex items-center justify-between">
+          <div>
+            <span class="text-xs text-slate-400 font-bold block leading-none">MRP</span>
+            <span class="text-base font-black text-black leading-none">$0.99</span>
+          </div>
+          <!-- Cursed Counter -->
+          <div class="flex items-center bg-white border-2 border-black rounded-xl overflow-hidden shadow-brutal-sm">
+            <button onclick="decrementLays()" class="px-2.5 py-1 font-black text-sm bg-slate-100 hover:bg-slate-200 active:scale-90 border-r border-black">-</button>
+            <span id="lays-qty-display" class="px-3 font-mono font-black text-xs text-blinkRed">0</span>
+            <button onclick="decrementLays()" class="px-2.5 py-1 font-black text-sm bg-blinkYellow hover:bg-yellow-300 active:scale-90 border-l border-black">+</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. FRESH TOMATOES 1KG (Rapid Price Flicker between $1.99, $420.69, Your Soul) -->
+      <div class="product-card group relative bg-white border-3 border-black rounded-2xl p-3.5 flex flex-col justify-between shadow-brutal hover:shadow-brutal-lg transition duration-150" data-category="veggies">
+        <div class="absolute top-2.5 left-2.5 z-10 bg-blinkRed text-white text-[9px] font-black px-2 py-0.5 rounded border border-black uppercase">
+          VIBE PRICE
+        </div>
+        <div class="relative w-full h-36 bg-red-50 rounded-xl border-2 border-black flex items-center justify-center overflow-hidden mb-3">
+          <div class="text-6xl group-hover:scale-125 transition transform">🍅</div>
+          <div class="absolute bottom-1 right-1 text-[8px] font-extrabold bg-white border border-black px-1 rounded">1 kg</div>
+        </div>
+        <div>
+          <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Organic Uncertainty</span>
+          <h3 class="font-black text-sm md:text-base text-black leading-tight">Fresh Hybrid Tomatoes 1kg</h3>
+          <p class="text-[11px] font-semibold text-slate-600 mt-0.5">Price recalculates at the speed of stock market collapse.</p>
+        </div>
+        <div class="mt-4 pt-2.5 border-t border-slate-200 flex items-center justify-between">
+          <div class="overflow-hidden">
+            <span class="text-[10px] text-slate-400 font-bold block leading-none">LIVE QUOTE</span>
+            <span id="flicker-price-display" class="price-flicker text-xs md:text-sm font-black font-mono leading-none">$1.99</span>
+          </div>
+          <button onclick="addFlickerTomato()" class="bg-blinkGreen hover:bg-green-400 text-black font-black text-xs px-3.5 py-2 rounded-xl border-2 border-black shadow-brutal-sm active:scale-95">
+            LOCK PRICE
+          </button>
+        </div>
+      </div>
+
+      <!-- 4. MAGGI 2-MINUTE NOODLES (Ask Mother Confirmation Modal) -->
+      <div class="product-card group relative bg-white border-3 border-black rounded-2xl p-3.5 flex flex-col justify-between shadow-brutal hover:shadow-brutal-lg transition duration-150" data-category="noodles">
+        <div class="absolute top-2.5 left-2.5 z-10 bg-amber-400 text-black text-[9px] font-black px-2 py-0.5 rounded border border-black uppercase">
+          MOM'S APPROVAL REQ.
+        </div>
+        <div class="relative w-full h-36 bg-yellow-100 rounded-xl border-2 border-black flex items-center justify-center overflow-hidden mb-3">
+          <div class="text-6xl group-hover:rotate-12 transition transform">🍜</div>
+          <div class="absolute bottom-1 right-1 text-[8px] font-extrabold bg-white border border-black px-1 rounded">Pack of 4</div>
+        </div>
+        <div>
+          <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Nestle Hostage</span>
+          <h3 class="font-black text-sm md:text-base text-black leading-tight">Maggi 2-Minute Noodles</h3>
+          <p class="text-[11px] font-semibold text-slate-600 mt-0.5">Requires verified written consent from maternal lineage.</p>
+        </div>
+        <div class="mt-4 pt-2.5 border-t border-slate-200 flex items-center justify-between">
+          <div>
+            <span class="text-xs text-slate-400 font-bold block leading-none">MRP</span>
+            <span class="text-base font-black text-black leading-none">$0.70</span>
+          </div>
+          <button onclick="openMotherModal()" class="bg-blinkYellow hover:bg-yellow-400 text-black font-black text-xs px-4 py-2 rounded-xl border-2 border-black shadow-brutal-sm active:scale-95">
+            ADD
+          </button>
+        </div>
+      </div>
+
+      <!-- 5. CRYING ONIONS (Causes Screen To Rain Tear Particles) -->
+      <div class="product-card group relative bg-white border-3 border-black rounded-2xl p-3.5 flex flex-col justify-between shadow-brutal hover:shadow-brutal-lg transition duration-150" data-category="veggies" onmouseenter="startOnionCrying()" onmouseleave="stopOnionCrying()">
+        <div class="absolute top-2.5 left-2.5 z-10 bg-purple-600 text-white text-[9px] font-black px-2 py-0.5 rounded border border-black uppercase">
+          EMOTIONAL DAMAGE
+        </div>
+        <div class="relative w-full h-36 bg-purple-50 rounded-xl border-2 border-black flex items-center justify-center overflow-hidden mb-3">
+          <div class="text-6xl group-hover:scale-110 animate-bounce">🧅</div>
+          <div class="absolute bottom-1 right-1 text-[8px] font-extrabold bg-white border border-black px-1 rounded">1 kg</div>
+        </div>
+        <div>
+          <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Tear Gas Produce</span>
+          <h3 class="font-black text-sm md:text-base text-black leading-tight">Nasik Crying Onions</h3>
+          <p class="text-[11px] font-semibold text-slate-600 mt-0.5">Hovering makes your browser weep authentic tear droplets.</p>
+        </div>
+        <div class="mt-4 pt-2.5 border-t border-slate-200 flex items-center justify-between">
+          <div>
+            <span class="text-xs text-slate-400 font-bold block leading-none">MRP</span>
+            <span class="text-base font-black text-black leading-none">$2.10</span>
+          </div>
+          <button onclick="addOnionItem()" class="bg-blinkYellow hover:bg-yellow-400 text-black font-black text-xs px-4 py-2 rounded-xl border-2 border-black shadow-brutal-sm active:scale-95">
+            ADD
+          </button>
+        </div>
+      </div>
+
+      <!-- 6. COCA-COLA 2L (Shrinks away to 1px on hover) -->
+      <div class="product-card group relative bg-white border-3 border-black rounded-2xl p-3.5 flex flex-col justify-between shadow-brutal hover:shadow-brutal-lg transition duration-150" data-category="drinks">
+        <div class="absolute top-2.5 left-2.5 z-10 bg-blinkRed text-white text-[9px] font-black px-2 py-0.5 rounded border border-black uppercase">
+          BATTERY ACID
+        </div>
+        <div class="relative w-full h-36 bg-red-100 rounded-xl border-2 border-black flex items-center justify-center overflow-hidden mb-3">
+          <div class="text-6xl group-hover:rotate-45 transition transform">🥤</div>
+          <div class="absolute bottom-1 right-1 text-[8px] font-extrabold bg-white border border-black px-1 rounded">2 Litres</div>
+        </div>
+        <div>
+          <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Industrial Solvent</span>
+          <h3 class="font-black text-sm md:text-base text-black leading-tight">Coke 2L (Corrosive Edition)</h3>
+          <p class="text-[11px] font-semibold text-slate-600 mt-0.5">The ADD button physically shrinks out of existence as you approach.</p>
+        </div>
+        <div class="mt-4 pt-2.5 border-t border-slate-200 flex items-center justify-between min-h-[46px]">
+          <div>
+            <span class="text-xs text-slate-400 font-bold block leading-none">MRP</span>
+            <span class="text-base font-black text-black leading-none">$1.95</span>
+          </div>
+          <div class="relative w-24 h-10 flex items-center justify-end">
+            <button 
+              id="shrinking-coke-btn" 
+              onmouseenter="shrinkCokeBtn(this)" 
+              onclick="addCokeItem(this)" 
+              class="bg-blinkDark text-white font-black text-xs px-3.5 py-2 rounded-xl border-2 border-black shadow-brutal-sm transition-all duration-150"
+            >
+              ADD
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7. BEN & JERRY'S MELTED ICE CREAM (Rotates 360 & Declares Out of Stock) -->
+      <div class="product-card group relative bg-white border-3 border-black rounded-2xl p-3.5 flex flex-col justify-between shadow-brutal hover:shadow-brutal-lg transition duration-150" data-category="icecream">
+        <div class="absolute top-2.5 left-2.5 z-10 bg-cyan-400 text-black text-[9px] font-black px-2 py-0.5 rounded border border-black uppercase">
+          WARM & LIQUID
+        </div>
+        <div class="relative w-full h-36 bg-cyan-50 rounded-xl border-2 border-black flex items-center justify-center overflow-hidden mb-3">
+          <div class="text-6xl group-hover:scale-90 transition transform">🍦</div>
+          <div class="absolute bottom-1 right-1 text-[8px] font-extrabold bg-white border border-black px-1 rounded">Pre-melted</div>
+        </div>
+        <div>
+          <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Room Temp Gourmet</span>
+          <h3 id="benjerry-title" class="font-black text-sm md:text-base text-black leading-tight">Ben & Jerry's Existential Crisis</h3>
+          <p class="text-[11px] font-semibold text-slate-600 mt-0.5">Contains 0g sugar, 100g regrets. Served with a straw.</p>
+        </div>
+        <div class="mt-4 pt-2.5 border-t border-slate-200 flex items-center justify-between">
+          <div>
+            <span class="text-xs text-slate-400 font-bold block leading-none">MRP</span>
+            <span class="text-base font-black text-black leading-none">$6.49</span>
+          </div>
+          <button onclick="triggerIceCreamMeltdown(this)" class="bg-blinkYellow hover:bg-yellow-400 text-black font-black text-xs px-4 py-2 rounded-xl border-2 border-black shadow-brutal-sm active:scale-95">
+            ADD
+          </button>
+        </div>
+      </div>
+
+      <!-- 8. UNREGISTERED HYDRAULIC CEMENT (Quick Commerce Staple) -->
+      <div class="product-card group relative bg-white border-3 border-black rounded-2xl p-3.5 flex flex-col justify-between shadow-brutal hover:shadow-brutal-lg transition duration-150" data-category="dairy">
+        <div class="absolute top-2.5 left-2.5 z-10 bg-slate-800 text-white text-[9px] font-black px-2 py-0.5 rounded border border-black uppercase">
+          50 KG SACK
+        </div>
+        <div class="relative w-full h-36 bg-slate-100 rounded-xl border-2 border-black flex items-center justify-center overflow-hidden mb-3">
+          <div class="text-6xl group-hover:scale-110 transition transform">🧱</div>
+          <div class="absolute bottom-1 right-1 text-[8px] font-extrabold bg-white border border-black px-1 rounded">50,000 g</div>
+        </div>
+        <div>
+          <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Pantry Essentials</span>
+          <h3 class="font-black text-sm md:text-base text-black leading-tight">Unregistered Hydraulic Cement</h3>
+          <p class="text-[11px] font-semibold text-slate-600 mt-0.5">Delivered via trebuchet directly into your bedroom window.</p>
+        </div>
+        <div class="mt-4 pt-2.5 border-t border-slate-200 flex items-center justify-between">
+          <div>
+            <span class="text-xs text-slate-400 font-bold block leading-none">MRP</span>
+            <span class="text-base font-black text-black leading-none">$7.80</span>
+          </div>
+          <button onclick="addCementItem()" class="bg-blinkGreen hover:bg-green-400 text-black font-black text-xs px-4 py-2 rounded-xl border-2 border-black shadow-brutal-sm active:scale-95">
+            ADD
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ==========================================
+       MR. BLINKEE: THE MOCKING LAUGH POPUP MASCOT
+       ========================================== -->
+  <div id="mr-blinkee-container" class="fixed bottom-5 right-5 z-50 transition-all duration-300 transform translate-y-0 flex flex-col items-end">
+    <!-- Speech Bubble -->
+    <div id="mr-blinkee-bubble" class="speech-bubble relative bg-blinkYellow border-3 border-black rounded-2xl p-4 shadow-brutal-xl max-w-xs mb-3 text-slate-900 font-bold text-xs md:text-sm animate-bounce">
+      <!-- Escaping Close Button -->
+      <button 
+        id="mr-blinkee-close" 
+        onmouseenter="dodgeCloseButton(this)" 
+        onclick="cloneMascotMitosis(this)" 
+        class="absolute -top-3 -left-3 bg-blinkRed text-white rounded-full w-7 h-7 flex items-center justify-center border-2 border-black font-black text-sm hover:scale-125 transition-transform shadow-brutal-sm cursor-pointer z-30"
+        title="Close this mockery"
+      >
+        ✕
+      </button>
+      <div class="text-[10px] uppercase font-black tracking-widest text-slate-700 mb-1 flex items-center justify-between">
+        <span>🤡 MR. BLINKEE SAYS:</span>
+        <span class="text-[9px] bg-black text-white px-1.5 py-0.2 rounded font-mono">UNMUTED</span>
+      </div>
+      <p id="mr-blinkee-quote" class="leading-snug text-black">
+        "Skill issue detected. Can't even add milk to cart? Look at you. Absolute cinema."
+      </p>
+    </div>
+
+    <!-- Mascot Avatar Avatar -->
+    <div id="mr-blinkee-avatar" onclick="pokeMascot(event)" class="cursor-pointer group flex items-center justify-center w-20 h-20 bg-blinkYellow border-3 border-black rounded-2xl shadow-brutal hover:scale-110 active:scale-95 transition-all relative">
+      <!-- SVG Bag Face with Googly Eyes -->
+      <div class="text-4xl select-none transform group-hover:rotate-12 transition">🛍️</div>
+      <div class="absolute -top-2 -right-2 bg-blinkRed text-white text-[10px] font-black px-1.5 py-0.5 rounded-full border border-black animate-ping">
+        !
+      </div>
+    </div>
+  </div>
+
+  <!-- Second/Third Cloned Mascots Container -->
+  <div id="mascot-clones-area" class="pointer-events-none"></div>
+
+  <!-- ==========================================
+       SLIDE-OUT CART NIGHTMARE DRAWER
+       ========================================== -->
+  <div id="cart-drawer" class="fixed inset-y-0 right-0 w-full max-w-md bg-white border-l-4 border-black shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col justify-between">
+    <!-- Cart Header -->
+    <div class="p-4 bg-blinkYellow border-b-3 border-black flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="text-2xl">🛒</span>
+        <div>
+          <h2 class="font-black text-lg text-black leading-none">MY HOSTAGE CART</h2>
+          <span class="text-[10px] font-extrabold text-slate-800 uppercase">Items cannot be returned or reasoned with</span>
+        </div>
+      </div>
+      <button onclick="toggleCartDrawer(false)" class="bg-black text-white w-8 h-8 rounded-lg border-2 border-black flex items-center justify-center font-black hover:bg-blinkRed transition">
+        ✕
+      </button>
+    </div>
+
+    <!-- Cart Items Scroll Area -->
+    <div class="flex-1 overflow-y-auto p-4 space-y-3" id="cart-items-container">
+      <div id="cart-empty-state" class="text-center py-12">
+        <div class="text-6xl mb-2">🪹</div>
+        <h3 class="font-black text-base">Your cart is dangerously empty</h3>
+        <p class="text-xs text-slate-500 font-bold mt-1">Our CEO is crying in his Lamborghini. Buy something.</p>
+      </div>
+    </div>
+
+    <!-- Cursed Fees & Promo Code Section -->
+    <div class="p-4 bg-slate-50 border-t-3 border-black space-y-3">
+      <!-- Promo Code Input with Reverse Discount -->
+      <div class="flex gap-2">
+        <input 
+          type="text" 
+          id="promo-code-input" 
+          placeholder="Promo code (e.g. SAVE50, FREESHIP)" 
+          class="flex-1 px-3 py-2 bg-white border-2 border-black rounded-lg text-xs font-bold uppercase focus:outline-none focus:ring-1 focus:ring-black"
+        >
+        <button onclick="applyCursedPromo()" class="bg-black text-blinkYellow font-extrabold text-xs px-3 py-2 rounded-lg border border-black hover:bg-slate-800 active:scale-95">
+          APPLY PENALTY
+        </button>
+      </div>
+      <div id="promo-status" class="hidden text-[10px] font-black text-blinkRed bg-red-50 border border-red-200 p-1.5 rounded"></div>
+
+      <!-- Junk Fee Breakdown -->
+      <div class="bg-white border-2 border-black rounded-xl p-3 space-y-1.5 text-xs font-bold shadow-sm">
+        <div class="flex justify-between text-slate-600">
+          <span>Items Subtotal:</span>
+          <span id="fee-subtotal" class="font-mono">$0.00</span>
+        </div>
+        <div class="flex justify-between text-slate-600">
+          <span>Delivery Partner Emotional Compensation:</span>
+          <span class="font-mono text-blinkRed">+$14.50</span>
+        </div>
+        <div class="flex justify-between text-slate-600">
+          <span>Oxygen Surcharge (0.2L inhale):</span>
+          <span class="font-mono text-blinkRed">+$0.99</span>
+        </div>
+        <div class="flex justify-between text-slate-600">
+          <span>Rain Fee (Forecast: 100% Sunny):</span>
+          <span class="font-mono text-blinkRed">+$6.40</span>
+        </div>
+        <div class="flex justify-between text-slate-600">
+          <span>"Because We Felt Like It" Fee:</span>
+          <span class="font-mono text-blinkRed">+$9.99</span>
+        </div>
+        <div id="promo-penalty-row" class="hidden flex justify-between text-blinkRed">
+          <span>Greed Penalty (Used coupon):</span>
+          <span id="fee-promo-penalty" class="font-mono">+$35.00</span>
+        </div>
+        <div class="border-t-2 border-dashed border-slate-300 pt-2 flex justify-between text-sm font-black text-black">
+          <span>GRAND EXTORTION TOTAL:</span>
+          <span id="fee-grand-total" class="font-mono text-base text-blinkDarkGreen">$31.88</span>
+        </div>
+      </div>
+
+      <!-- Cursed Action Buttons -->
+      <div class="flex gap-2">
+        <!-- Clear Cart (triggers BSOD) -->
+        <button 
+          id="clear-cart-btn" 
+          onclick="triggerBSOD()" 
+          class="flex-1 bg-white hover:bg-red-50 text-blinkRed font-black text-xs py-3 rounded-xl border-2 border-black shadow-brutal-sm active:scale-95 transition"
+        >
+          🗑️ CLEAR CART
+        </button>
+        <!-- Proceed To Pay (triggers Impossible CAPTCHA) -->
+        <button 
+          id="pay-now-btn" 
+          onclick="startCheckoutNightmare()" 
+          class="flex-[2] bg-blinkGreen hover:bg-green-400 text-black font-black text-sm py-3 rounded-xl border-2 border-black shadow-brutal active:scale-95 transition flex items-center justify-center gap-2"
+        >
+          <span>PROCEED TO CRY</span>
+          <span class="text-xs">➔</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cart Backdrop Backdrop -->
+  <div id="cart-backdrop" onclick="toggleCartDrawer(false)" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-40 transition-opacity"></div>
+
+  <!-- ==========================================
+       MODAL 1: MOTHER CONFIRMATION ("NO" & "ALSO NO")
+       ========================================== -->
+  <div id="mother-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm">
+    <div class="bg-white border-4 border-black rounded-3xl p-6 max-w-sm w-full shadow-brutal-xl text-center transform scale-95 transition-transform animate-in fade-in zoom-in">
+      <div class="text-6xl mb-3 animate-bounce">👵🩴</div>
+      <h3 class="font-black text-xl text-black">MATERNAL CLEARANCE REQUIRED</h3>
+      <p class="text-xs font-bold text-slate-600 mt-2 leading-relaxed">
+        Are you sure? Really sure? Did you ask your mother first before adding Maggi? Have you eaten any green vegetables today?
+      </p>
+      <div class="mt-6 flex flex-col gap-3">
+        <button onclick="handleMotherChoice('NO')" class="bg-blinkRed text-white font-black py-3 rounded-xl border-2 border-black shadow-brutal hover:bg-red-700 active:scale-95 transition">
+          ❌ NO, I HAVEN'T
+        </button>
+        <button onclick="handleMotherChoice('ALSO NO')" class="bg-blinkYellow text-black font-black py-3 rounded-xl border-2 border-black shadow-brutal hover:bg-yellow-400 active:scale-95 transition">
+          ⛔ ALSO NO (DISOBEY MOTHER)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       MODAL 2: LOCATION PIN RUNAWAY MAP
+       ========================================== -->
+  <div id="location-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+    <div class="bg-white border-4 border-black rounded-3xl p-6 max-w-md w-full shadow-brutal-xl relative">
+      <div class="flex justify-between items-center mb-3">
+        <div>
+          <h3 class="font-black text-lg text-black leading-none">PIN EXACT LOCATION</h3>
+          <span class="text-[10px] font-bold text-slate-500">Move mouse to pin. Pin will actively resist your touch.</span>
+        </div>
+        <button onclick="closeLocationModal()" class="font-black text-sm bg-black text-white w-7 h-7 rounded-md hover:bg-blinkRed">✕</button>
+      </div>
+      <!-- Interactive Repulsive Map Area -->
+      <div id="map-repulsion-arena" class="relative w-full h-64 bg-slate-200 rounded-2xl border-3 border-black overflow-hidden cursor-crosshair">
+        <!-- Grid roads and mock map graphics -->
+        <div class="absolute inset-0 opacity-40 bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div class="absolute top-1/2 left-0 right-0 h-4 bg-amber-300 border-y border-black"></div>
+        <div class="absolute top-0 bottom-0 left-1/3 w-5 bg-slate-300 border-x border-black"></div>
+        <div class="absolute top-8 left-8 bg-blue-200 border border-black px-2 py-1 rounded text-[10px] font-extrabold">🌊 River Styx</div>
+        <div class="absolute bottom-6 right-6 bg-green-200 border border-black px-2 py-1 rounded text-[10px] font-extrabold">🌳 Hopeless Park</div>
+
+        <!-- Runaway Pin Physics Element -->
+        <div id="runaway-pin" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-4xl select-none transition-transform duration-75 pointer-events-none drop-shadow-md">
+          📍
+        </div>
+      </div>
+      <div class="mt-4 flex items-center justify-between">
+        <span id="pin-distance-feedback" class="text-xs font-black text-blinkRed font-mono">Distance to pin: ∞ light years</span>
+        <button onclick="confirmLocationChaos()" class="bg-blinkYellow hover:bg-yellow-400 text-black font-black text-xs px-4 py-2.5 rounded-xl border-2 border-black shadow-brutal-sm active:scale-95">
+          CONFIRM ARBITRARY PIN
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       MODAL 3: IMPOSSIBLE EXISTENTIAL VEGGIE CAPTCHA
+       ========================================== -->
+  <div id="captcha-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
+    <div class="bg-white border-4 border-black rounded-3xl p-6 max-w-md w-full shadow-brutal-xl">
+      <div class="bg-blinkYellow border-2 border-black rounded-xl p-3 mb-4 flex items-center gap-3">
+        <span class="text-3xl">🤖</span>
+        <div>
+          <h3 class="font-black text-sm uppercase text-black leading-tight">MANDATORY CAPTCHA</h3>
+          <p class="text-xs font-extrabold text-slate-800">Select all images of vegetables experiencing existential dread.</p>
+        </div>
+      </div>
+
+      <!-- 3x3 Grid of Vegetables with Emotional Crises -->
+      <div class="grid grid-cols-3 gap-2.5" id="captcha-grid">
+        <!-- Injected dynamically with existential veggie cards -->
+      </div>
+
+      <div class="mt-4 flex items-center justify-between border-t-2 border-slate-200 pt-3">
+        <button onclick="refreshCaptcha()" class="text-xs font-extrabold text-slate-600 hover:text-black flex items-center gap-1">
+          🔄 New Trauma
+        </button>
+        <button onclick="submitCaptchaVerification()" class="bg-blinkGreen hover:bg-green-400 text-black font-black text-xs px-5 py-2.5 rounded-xl border-2 border-black shadow-brutal-sm active:scale-95">
+          VERIFY PAIN
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       MODAL 4: ETERNAL OFFSHORE MONEY TRANSFER (99.99% STUCK)
+       ========================================== -->
+  <div id="transfer-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-md">
+    <div class="bg-white border-4 border-black rounded-3xl p-6 max-w-sm w-full shadow-brutal-xl text-center">
+      <!-- Unhinged Loading Spinner -->
+      <div class="w-16 h-16 border-4 border-black border-t-blinkGreen rounded-full animate-spin mx-auto mb-4"></div>
+      <h3 class="font-black text-lg text-black">TRANSFERRING ASSETS</h3>
+      <p class="text-xs font-bold text-slate-600 mt-1 leading-relaxed">
+        Rerouting your credit card balance to an untraceable shell corporation in the Cayman Islands...
+      </p>
+
+      <!-- Deceptive Progress Bar -->
+      <div class="w-full bg-slate-200 border-2 border-black rounded-full h-5 mt-4 overflow-hidden p-0.5 relative">
+        <div id="transfer-progress-bar" class="bg-blinkGreen h-full rounded-full transition-all duration-300 w-[99.99%]"></div>
+        <span id="transfer-percent-text" class="absolute inset-0 flex items-center justify-center font-mono font-black text-[10px] text-black">99.99%</span>
+      </div>
+
+      <div class="mt-4 bg-yellow-50 border border-black p-2.5 rounded-xl text-left font-mono text-[11px] space-y-1">
+        <div>⏳ Wait Time: <span id="wait-time-text" class="font-bold text-blinkRed">74 years, 3 months</span></div>
+        <div>💳 Card: •••• 4242 (Overdrawn)</div>
+        <div>📡 Latency: 9,420 ms</div>
+      </div>
+
+      <div class="mt-4 flex gap-2">
+        <button onclick="abortTransfer()" class="flex-1 bg-black text-white font-black text-xs py-2 rounded-xl border border-black hover:bg-blinkRed active:scale-95">
+          GIVE UP
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       FULLSCREEN MEME FLASH OVERLAY
+       ========================================== -->
+  <div id="meme-flash-overlay">
+    <div class="text-center p-6 bg-blinkYellow border-4 border-black rounded-3xl shadow-brutal-xl max-w-md animate-bounce">
+      <div class="text-8xl mb-3">💀🦝💀</div>
+      <h2 class="font-black text-3xl text-black">SKILL ISSUE CONFIRMED!</h2>
+      <p class="text-sm font-black text-slate-800 mt-2">
+        BRO THOUGHT HE COULD VIEW HIS CART IN PEACE! 😂🫵
+      </p>
+      <div class="mt-4 text-xs font-mono font-bold bg-white p-2 rounded-lg border-2 border-black">
+        🔊 AUDIO BUZZER ENGAGED • BLOOD PRESSURE PEAKED
+      </div>
+      <div id="meme-timer-notice" class="mt-3 text-xs font-mono font-black text-blinkRed bg-red-100 p-2 rounded-xl border-2 border-black">
+        ⏳ Mandatory Mocking Period: <span id="meme-countdown-seconds">6</span>s remaining
+      </div>
+      <button onclick="dismissMemeFlash()" class="mt-4 bg-black text-white font-black px-6 py-2.5 rounded-xl text-sm border-2 border-black hover:bg-blinkRed transition">
+        RETURN TO SUFFERING
+      </button>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       FULLSCREEN BSOD OVERLAY
+       ========================================== -->
+  <div id="bsod-modal">
+    <div class="max-w-3xl mx-auto space-y-6 pt-12">
+      <div class="text-6xl font-black">:(</div>
+      <h1 class="text-2xl font-bold">A problem has been detected and BLINKEET.SYS has been shut down to prevent damage to your pantry.</h1>
+      <p class="text-sm">
+        PAGE_FAULT_IN_NONPAGED_GROCERY_AREA
+      </p>
+      <p class="text-sm leading-relaxed">
+        If this is the first time you've seen this Stop error screen, restart your hunger. If this screen appears again, follow these steps:<br>
+        Check to make sure any new coriander or milk is properly installed. If this is a new installation, ask your mother for hardware or software updates she might need.
+      </p>
+      <div class="border-t border-white/40 pt-4 text-xs font-mono space-y-1">
+        <div>Technical information:</div>
+        <div>*** STOP: 0x000000D1 (0x00000000, 0x00000002, 0x00000000, 0xF86B5A89)</div>
+        <div>*** BLINKEET.SYS - Address F86B5A89 base at F86B2000, DateStamp 3d6dd67c</div>
+      </div>
+      <div class="pt-2 text-sm font-bold animate-pulse">
+        Dumping physical memory of all snacks: <span id="bsod-counter">0</span>% complete...
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       TOAST CONTAINER
+       ========================================== -->
+  <div id="toast-container" class="fixed top-20 right-4 z-50 flex flex-col gap-2 max-w-sm pointer-events-none"></div>
+
+  <!-- ==========================================
+       STICKY FOOTER WITH "EMERGENCY SANITY TOGGLE"
+       ========================================== -->
+  <footer class="fixed bottom-0 left-0 right-0 z-40 bg-black text-white border-t-4 border-black py-2.5 px-4 shadow-brutal">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+      <div class="flex items-center gap-2">
+        <span class="text-lg animate-spin">🌀</span>
+        <span class="text-[11px] font-mono text-slate-300">BLINKEET CORE ENGINE v0.0.0-ALPHA (DO NOT USE WHILE HUNGRY)</span>
+      </div>
+
+      <!-- THE WEAPONIZED SANITY BUTTON -->
+      <button 
+        id="sanity-toggle-btn" 
+        onclick="toggleEmergencySanity()" 
+        class="bg-blinkRed hover:bg-red-600 text-white font-black text-xs px-4 py-2 rounded-xl border-2 border-white shadow-brutal-sm active:scale-90 transition flex items-center gap-2"
+        title="Guaranteed to fix all UI issues and calm your nerves"
+      >
+        <span>🛠️ EMERGENCY SANITY TOGGLE (FIX UI)</span>
+      </button>
+    </div>
+  </footer>
+
+  <!-- ==========================================
+       VANILLA JAVASCRIPT & WEB AUDIO SYNTHESIZER
+       ========================================== -->
+  <script>
+    /* ==========================================================================
+       1. WEB AUDIO API MEME SYNTHESIZER (100% NATIVE, ZERO EXTERNAL DEPENDENCIES)
+       ========================================================================== */
+    class AudioSynthesizer {
+      constructor() {
+        this.ctx = null;
+        this.muted = false;
+      }
+
+      init() {
+        if (!this.ctx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (AudioContext) {
+            this.ctx = new AudioContext();
+          }
+        }
+        if (this.ctx && this.ctx.state === 'suspended') {
+          this.ctx.resume();
+        }
+      }
+
+      toggleMute() {
+        this.muted = !this.muted;
+        return this.muted;
+      }
+
+      // High-pitched Buzzer / Loud Siren
+      playBuzzer() {
+        if (this.muted) return;
+        this.init();
+        if (!this.ctx) return;
+
+        const osc1 = this.ctx.createOscillator();
+        const osc2 = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        osc1.type = 'sawtooth';
+        osc2.type = 'square';
+        osc1.frequency.setValueAtTime(880, this.ctx.currentTime);
+        osc2.frequency.setValueAtTime(892, this.ctx.currentTime); // Dissonant beating
+
+        gain.gain.setValueAtTime(0.2, this.ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.6);
+
+        osc1.connect(gain);
+        osc2.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        osc1.start();
+        osc2.start();
+        osc1.stop(this.ctx.currentTime + 0.6);
+        osc2.stop(this.ctx.currentTime + 0.6);
+      }
+
+      // Obnoxious Multi-tone Laugh Track (Arpeggiated Cackle)
+      playLaugh() {
+        if (this.muted) return;
+        this.init();
+        if (!this.ctx) return;
+
+        const notes = [523.25, 659.25, 783.99, 1046.50, 1318.51, 880, 1174.66, 1567.98];
+        const now = this.ctx.currentTime;
+
+        notes.forEach((freq, idx) => {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+
+          osc.type = idx % 2 === 0 ? 'triangle' : 'sine';
+          osc.frequency.setValueAtTime(freq, now + idx * 0.08);
+
+          // Add pitch vibrato
+          osc.frequency.exponentialRampToValueAtTime(freq * 1.25, now + idx * 0.08 + 0.07);
+
+          gain.gain.setValueAtTime(0.18, now + idx * 0.08);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + idx * 0.08 + 0.1);
+
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+
+          osc.start(now + idx * 0.08);
+          osc.stop(now + idx * 0.08 + 0.12);
+        });
+      }
+
+      // Dodging Whoosh / Boing
+      playBoing() {
+        if (this.muted) return;
+        this.init();
+        if (!this.ctx) return;
+
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(200, this.ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(800, this.ctx.currentTime + 0.18);
+
+        gain.gain.setValueAtTime(0.25, this.ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.2);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        osc.start();
+        osc.stop(this.ctx.currentTime + 0.22);
+      }
+
+      // Sad Trombone (Wah-wah-wah-waaah)
+      playSadWah() {
+        if (this.muted) return;
+        this.init();
+        if (!this.ctx) return;
+
+        const pitches = [349.23, 329.63, 311.13, 293.66]; // F, E, Eb, D
+        const now = this.ctx.currentTime;
+
+        pitches.forEach((freq, i) => {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(freq, now + i * 0.22);
+          if (i === 3) {
+            // Long slide on last note
+            osc.frequency.linearRampToValueAtTime(freq - 30, now + i * 0.22 + 0.6);
+          }
+
+          gain.gain.setValueAtTime(0.15, now + i * 0.22);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + i * 0.22 + (i === 3 ? 0.7 : 0.2));
+
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+
+          osc.start(now + i * 0.22);
+          osc.stop(now + i * 0.22 + (i === 3 ? 0.75 : 0.22));
+        });
+      }
+
+      // Item Duplication Pop
+      playPop() {
+        if (this.muted) return;
+        this.init();
+        if (!this.ctx) return;
+
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(600, this.ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(1200, this.ctx.currentTime + 0.08);
+
+        gain.gain.setValueAtTime(0.3, this.ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.09);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        osc.start();
+        osc.stop(this.ctx.currentTime + 0.1);
+      }
+
+      // Cha-Ching Synth
+      playChaChing() {
+        if (this.muted) return;
+        this.init();
+        if (!this.ctx) return;
+
+        const now = this.ctx.currentTime;
+        [1500, 2400].forEach((freq, i) => {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, now + i * 0.08);
+
+          gain.gain.setValueAtTime(0.2, now + i * 0.08);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.08 + 0.3);
+
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+
+          osc.start(now + i * 0.08);
+          osc.stop(now + i * 0.08 + 0.35);
+        });
+      }
+    }
+
+    const sound = new AudioSynthesizer();
+
+    // Setup Audio Toggle
+    document.getElementById('audio-toggle-btn').addEventListener('click', () => {
+      const isMuted = sound.toggleMute();
+      document.getElementById('audio-icon').textContent = isMuted ? '🔇' : '🔊';
+      document.getElementById('audio-label').textContent = isMuted ? 'CHAOS AUDIO: MUTED' : 'CHAOS AUDIO: ON';
+      showToast(isMuted ? 'Audio muted. Your ears are temporarily safe.' : 'Audio unmuted. Brace yourself.', isMuted ? 'info' : 'warning');
+    });
+
+    /* ==========================================================================
+       2. UNPREDICTABLE DELIVERY TIMER BADGE
+       ========================================================================== */
+    const timerQuotes = [
+      "⚡ 10 SECONDS",
+      "⚡ 74 YEARS",
+      "⚡ ARRIVING YESTERDAY",
+      "⚡ DELIVERY IN -42s",
+      "⚡ HEAT DEATH OF UNIVERSE",
+      "⚡ RIDER EATING YOUR FRIES",
+      "⚡ 8 MILLISECONDS",
+      "⚡ ESTIMATED: 4 MILLENNIA",
+      "⚡ RIDER FORGOT HIS PANTS",
+      "⚡ WHEN HALF-LIFE 3 RELEASES"
+    ];
+    let currentTimerIdx = 0;
+    const timerTextEl = document.getElementById('delivery-timer-text');
+
+    setInterval(() => {
+      currentTimerIdx = (currentTimerIdx + 1) % timerQuotes.length;
+      timerTextEl.textContent = timerQuotes[currentTimerIdx];
+      if (Math.random() > 0.6) {
+        timerTextEl.classList.toggle('text-blinkRed');
+      }
+    }, 2800);
+
+    document.getElementById('delivery-timer-badge').addEventListener('click', () => {
+      sound.playBoing();
+      timerTextEl.textContent = "⚡ NEGATIVE 999 HOURS";
+      showToast("Delivery accelerated into the past. We already arrived.", "warning");
+    });
+
+    /* ==========================================================================
+       3. SEARCH BAR AUTO-SCRAMBLER WITH WEAPONIZED AUTOCOMPLETE
+       ========================================================================== */
+    const searchInput = document.getElementById('search-input');
+    const searchDropdown = document.getElementById('search-dropdown');
+    const searchResultsList = document.getElementById('search-results-list');
+
+    const cursedSearchPool = [
+      { name: "Unregistered Hydraulic Cement 50kg", price: "$7.80", category: "Heavy Pantry" },
+      { name: "Loose Corroded AAA Batteries (Box of 80)", price: "$12.99", category: "Hazardous Snacks" },
+      { name: "Enriched Weapons-Grade Uranium Pellets", price: "$499,999.00", category: "Midnight Munchies" },
+      { name: "Expired Tactical Mayonnaise (1998 Vintage)", price: "$3.40", category: "Bio-weapon Condiments" },
+      { name: "Haunted Victorian Porcelain Doll (Stares Back)", price: "$66.60", category: "Room Decor" },
+      { name: "Single Cold French Fry Found Under Seat", price: "$0.10", category: "Fast Food" },
+      { name: "Emotional Support Brick (Certified Heavy)", price: "$19.99", category: "Wellness" },
+      { name: "Liquid Nitrogen 500 Litres (In a Plastic Bag)", price: "$85.00", category: "Cold Beverages" },
+      { name: "Pre-chewed Bubblegum (Flavor Expired)", price: "$0.25", category: "Confectionery" }
+    ];
+
+    let typingCounter = 0;
+    searchInput.addEventListener('keydown', (e) => {
+      // Don't intercept tab or special control keys
+      if (['Tab', 'Escape', 'ArrowDown', 'ArrowUp', 'Enter'].includes(e.key)) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          executeCursedSearch();
+        }
+        return;
+      }
+
+      e.preventDefault();
+      typingCounter++;
+      
+      // Auto-scramble replacement based on preset phrases
+      const targetPhrase = cursedSearchPool[typingCounter % cursedSearchPool.length].name;
+      const currentLength = searchInput.value.length;
+      
+      if (e.key === 'Backspace') {
+        searchInput.value = searchInput.value.slice(0, -1);
+      } else {
+        searchInput.value = targetPhrase.slice(0, currentLength + 2);
+      }
+
+      sound.playPop();
+      renderSearchResults(searchInput.value);
+    });
+
+    function renderSearchResults(query) {
+      if (!query || query.trim().length === 0) {
+        searchDropdown.classList.add('hidden');
+        return;
+      }
+
+      searchResultsList.innerHTML = '';
+      const shuffled = [...cursedSearchPool].sort(() => 0.5 - Math.random()).slice(0, 3);
+
+      shuffled.forEach(item => {
+        const row = document.createElement('div');
+        row.className = "p-2.5 hover:bg-yellow-50 cursor-pointer flex items-center justify-between transition border-b border-slate-100 last:border-none";
+        row.innerHTML = `
+          <div>
+            <div class="font-black text-xs text-black">${item.name}</div>
+            <div class="text-[10px] text-slate-500 font-bold">${item.category}</div>
+          </div>
+          <div class="text-right">
+            <span class="font-mono font-black text-xs text-blinkDarkGreen">${item.price}</span>
+            <button onclick="addSearchItemDirectly('${item.name.replace(/'/g, "\\'")}', '${item.price}')" class="block mt-0.5 text-[9px] bg-black text-blinkYellow font-extrabold px-2 py-0.5 rounded">
+              HOARD
+            </button>
+          </div>
+        `;
+        searchResultsList.appendChild(row);
+      });
+
+      searchDropdown.classList.remove('hidden');
+    }
+
+    document.getElementById('search-btn').addEventListener('click', executeCursedSearch);
+
+    function executeCursedSearch() {
+      sound.playBuzzer();
+      searchDropdown.classList.add('hidden');
+      showToast(`Search query failed: Server deemed your search illegal. Added cement to cart instead.`, 'error');
+      addCementItem();
+    }
+
+    function addSearchItemDirectly(name, price) {
+      cartState.items.push({
+        id: 'search_' + Date.now(),
+        name: name,
+        price: parseFloat(price.replace(/[^0-9.]/g, '')) || 9.99,
+        quantity: 1,
+        unit: 'unit'
+      });
+      sound.playChaChing();
+      updateCartDisplay();
+      searchDropdown.classList.add('hidden');
+      showToast(`Added: ${name}! Non-refundable.`, 'success');
+    }
+
+    // Hide search dropdown on outside click
+    document.addEventListener('click', (e) => {
+      if (!searchInput.contains(e.target) && !searchDropdown.contains(e.target)) {
+        searchDropdown.classList.add('hidden');
+      }
+    });
+
+    /* ==========================================================================
+       4. LOCATION PICKER WITH RUNAWAY PHYSICS PIN
+       ========================================================================== */
+    const locationPickerBtn = document.getElementById('location-picker-btn');
+    const locationModal = document.getElementById('location-modal');
+    const runawayPin = document.getElementById('runaway-pin');
+    const mapArena = document.getElementById('map-repulsion-arena');
+    const pinDistanceFeedback = document.getElementById('pin-distance-feedback');
+
+    locationPickerBtn.addEventListener('click', () => {
+      locationModal.classList.remove('hidden');
+      sound.playBoing();
+      // Center pin
+      runawayPin.style.left = '50%';
+      runawayPin.style.top = '50%';
+    });
+
+    function closeLocationModal() {
+      locationModal.classList.add('hidden');
+    }
+
+    // Physics repulsion: pin runs away from cursor
+    mapArena.addEventListener('mousemove', (e) => {
+      const rect = mapArena.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
+
+      const pinRect = runawayPin.getBoundingClientRect();
+      const pinX = pinRect.left - rect.left + pinRect.width / 2;
+      const pinY = pinRect.top - rect.top + pinRect.height / 2;
+
+      const deltaX = pinX - mouseX;
+      const deltaY = pinY - mouseY;
+      const distance = Math.hypot(deltaX, deltaY);
+
+      pinDistanceFeedback.textContent = `Distance to pin: ${Math.round(distance * 42)} parsecs`;
+
+      if (distance < 90) {
+        // Compute push direction
+        const angle = Math.atan2(deltaY, deltaX);
+        const speed = 75;
+        let newX = pinX + Math.cos(angle) * speed;
+        let newY = pinY + Math.sin(angle) * speed;
+
+        // Boundary bounce / teleportation
+        const padding = 25;
+        if (newX < padding) newX = rect.width - padding - 30;
+        if (newX > rect.width - padding) newX = padding + 30;
+        if (newY < padding) newY = rect.height - padding - 30;
+        if (newY > rect.height - padding) newY = padding + 30;
+
+        runawayPin.style.left = `${newX}px`;
+        runawayPin.style.top = `${newY}px`;
+        runawayPin.style.transform = `translate(-50%, -50%) rotate(${Math.random() * 40 - 20}deg)`;
+        
+        sound.playBoing();
+      }
+    });
+
+    function confirmLocationChaos() {
+      closeLocationModal();
+      document.getElementById('current-location-text').textContent = 'Outer Asteroid Belt, Sector 7';
+      sound.playBuzzer();
+      showToast('Address outside solar system. Intergalactic Surcharge: $8,400.00 added.', 'error');
+      cartState.extraFees += 8400;
+      updateCartDisplay();
+    }
+
+    /* ==========================================================================
+       5. PRODUCT INTERACTIONS & CURSED BUTTONS
+       ========================================================================== */
+
+    // 1. Amul Milk Runaway ADD Button
+    function dodgeButton(btn) {
+      sound.playBoing();
+      const randomX = (Math.random() - 0.5) * 160;
+      const randomY = (Math.random() - 0.5) * 120;
+      btn.style.transform = `translate(${randomX}px, ${randomY}px) scale(0.9)`;
+    }
+
+    function addMilkChaos(btn) {
+      // If user manages to click it
+      sound.playBuzzer();
+      cartState.items.push({
+        id: 'milk_crates',
+        name: 'Amul Cow Milk (999 CRATES)',
+        price: 1.49,
+        quantity: 999,
+        unit: 'crates'
+      });
+      updateCartDisplay();
+      showToast('Added 999 crates of Amul Milk. Warehouses emptied. No refunds.', 'error');
+      btn.style.transform = 'translate(0, 0)';
+    }
+
+    // 2. Lay's Negative Counter
+    let laysQty = 0;
+    function decrementLays() {
+      laysQty -= 1;
+      document.getElementById('lays-qty-display').textContent = laysQty;
+      sound.playSadWah();
+      
+      const existing = cartState.items.find(i => i.id === 'lays');
+      if (existing) {
+        existing.quantity = laysQty;
+      } else {
+        cartState.items.push({
+          id: 'lays',
+          name: "Lay's Classic Salted (Deficit)",
+          price: 0.99,
+          quantity: laysQty,
+          unit: 'packets'
+        });
+      }
+      updateCartDisplay();
+      showToast(`Quantity decremented to ${laysQty}. You now owe our warehouse ${Math.abs(laysQty)} packets.`, 'warning');
+    }
+
+    // 3. Fresh Tomatoes Live Flicker Price
+    const flickerPrices = ["$1.99", "$420.69", "Your Soul", "$999,999", "$0.0001", "3 Bitcoins", "1 Liver", "$13.37"];
+    let flickerInterval = setInterval(() => {
+      const display = document.getElementById('flicker-price-display');
+      if (display) {
+        const randomPrice = flickerPrices[Math.floor(Math.random() * flickerPrices.length)];
+        display.textContent = randomPrice;
+      }
+    }, 250);
+
+    function addFlickerTomato() {
+      const currentPriceStr = document.getElementById('flicker-price-display').textContent;
+      let numericPrice = parseFloat(currentPriceStr.replace(/[^0-9.]/g, '')) || 420.69;
+      sound.playChaChing();
+      cartState.items.push({
+        id: 'tomato_' + Date.now(),
+        name: `Fresh Tomatoes 1kg (@ ${currentPriceStr})`,
+        price: numericPrice,
+        quantity: 1,
+        unit: 'kg'
+      });
+      updateCartDisplay();
+      showToast(`Locked in price of ${currentPriceStr}! Good luck contesting your credit card statement.`, 'success');
+    }
+
+    // 4. Maggi Ask Mother Modal
+    function openMotherModal() {
+      sound.playBuzzer();
+      document.getElementById('mother-modal').classList.remove('hidden');
+    }
+
+    function handleMotherChoice(choice) {
+      document.getElementById('mother-modal').classList.add('hidden');
+      sound.playSadWah();
+      if (choice === 'NO') {
+        showToast('PERMISSION DENIED! Mother ordered 10kg bitter gourd instead.', 'error');
+        cartState.items.push({
+          id: 'karela_' + Date.now(),
+          name: 'Bitter Gourd (Maternal Punishment)',
+          price: 4.50,
+          quantity: 1,
+          unit: 'kg'
+        });
+      } else {
+        showToast('DISOBEDIENCE PENALTY: 24 Packs added + $15.00 Guilt Tax.', 'warning');
+        cartState.items.push({
+          id: 'maggi_rebel_' + Date.now(),
+          name: 'Maggi 2-Min (Illegal Contraband x24)',
+          price: 16.80,
+          quantity: 24,
+          unit: 'packs'
+        });
+        cartState.extraFees += 15.0;
+      }
+      updateCartDisplay();
+    }
+
+    // 5. Crying Onions (Tears Screen Emitter)
+    let tearInterval = null;
+    function startOnionCrying() {
+      if (tearInterval) return;
+      tearInterval = setInterval(() => {
+        const tear = document.createElement('div');
+        tear.className = 'tear-particle';
+        tear.textContent = Math.random() > 0.5 ? '💧' : '😭';
+        tear.style.left = `${Math.random() * 95}vw`;
+        tear.style.top = '-20px';
+        document.body.appendChild(tear);
+        setTimeout(() => tear.remove(), 1800);
+      }, 100);
+    }
+
+    function stopOnionCrying() {
+      if (tearInterval) {
+        clearInterval(tearInterval);
+        tearInterval = null;
+      }
+    }
+
+    function addOnionItem() {
+      sound.playSadWah();
+      cartState.items.push({
+        id: 'onion_' + Date.now(),
+        name: 'Nasik Crying Onions 1kg',
+        price: 2.10,
+        quantity: 1,
+        unit: 'kg'
+      });
+      updateCartDisplay();
+      showToast('Added onions. Your screen is now permanently damp.', 'info');
+    }
+
+    // 6. Coke 2L Shrinking Button
+    let cokeScale = 1.0;
+    function shrinkCokeBtn(btn) {
+      cokeScale = Math.max(0.1, cokeScale - 0.25);
+      btn.style.transform = `scale(${cokeScale})`;
+      sound.playBoing();
+      if (cokeScale <= 0.15) {
+        btn.textContent = 'bye';
+        showToast('The Coke button collapsed into an atomic singularity.', 'error');
+      }
+    }
+
+    function addCokeItem(btn) {
+      sound.playChaChing();
+      cartState.items.push({
+        id: 'coke_' + Date.now(),
+        name: 'Coca-Cola 2L (Battery Acid)',
+        price: 1.95,
+        quantity: 1,
+        unit: 'bottle'
+      });
+      updateCartDisplay();
+      showToast('Successfully captured miniature Coke button! Respect.', 'success');
+      cokeScale = 1.0;
+      btn.style.transform = 'scale(1)';
+    }
+
+    // 7. Ben & Jerry's 360 Spin & Out of Stock Meltdown
+    function triggerIceCreamMeltdown(btn) {
+      sound.playSadWah();
+      btn.closest('.product-card').style.transition = 'transform 0.6s ease';
+      btn.closest('.product-card').style.transform = 'rotate(360deg)';
+      
+      setTimeout(() => {
+        btn.closest('.product-card').style.transform = 'none';
+        document.getElementById('benjerry-title').textContent = 'Ben & Jerry’s (SOLD OUT 1ms AGO)';
+        btn.textContent = 'SOLDOUT';
+        btn.disabled = true;
+        btn.className = 'bg-slate-300 text-slate-500 font-black text-xs px-4 py-2 rounded-xl border-2 border-black cursor-not-allowed';
+        showToast('Out of stock! The delivery driver drank your milkshake while waiting.', 'error');
+      }, 600);
+    }
+
+    // 8. Hydraulic Cement
+    function addCementItem() {
+      sound.playBuzzer();
+      cartState.items.push({
+        id: 'cement_' + Date.now(),
+        name: 'Unregistered Hydraulic Cement (50kg)',
+        price: 7.80,
+        quantity: 1,
+        unit: 'sack'
+      });
+      cartState.extraFees += 450.0; // Trebuchet surcharge
+      updateCartDisplay();
+      showToast('Added 50kg cement sack. Trebuchet launch fee ($450.00) attached.', 'warning');
+    }
+
+    /* ==========================================================================
+       6. CURSED CATEGORY TABS (PAGE FLIP & INVERT REALITY)
+       ========================================================================== */
+    function handleCategoryClick(btn, category) {
+      sound.playBoing();
+      const chaosRoll = Math.random();
+
+      if (chaosRoll < 0.3) {
+        // Upside down
+        document.body.classList.toggle('screen-upside-down');
+        showToast('GRAVITY FAILURE: Category inverts orientation of apartment.', 'warning');
+      } else if (chaosRoll < 0.6) {
+        // Invert colors
+        document.body.classList.toggle('screen-inverted');
+        showToast('NEURO-RETINAL REVERSAL: High contrast mode engaged.', 'error');
+      } else {
+        // Skew
+        document.body.classList.toggle('screen-tilted');
+        showToast('EARTHQUAKE SKEW: Please adjust your monitor physically.', 'info');
+      }
+
+      // Filter visual cards
+      const cards = document.querySelectorAll('.product-card');
+      cards.forEach(card => {
+        if (category === 'all' || card.dataset.category === category) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    /* ==========================================================================
+       7. CART LOGIC & CURSED JUNK FEES
+       ========================================================================== */
+    const cartState = {
+      items: [],
+      extraFees: 0,
+      promoPenalty: 0
+    };
+
+    function updateCartDisplay() {
+      const container = document.getElementById('cart-items-container');
+      const emptyState = document.getElementById('cart-empty-state');
+      const badge = document.getElementById('cart-item-count-badge');
+      
+      let totalCount = 0;
+      let itemsSubtotal = 0;
+
+      container.innerHTML = '';
+
+      if (cartState.items.length === 0) {
+        container.appendChild(emptyState);
+        emptyState.classList.remove('hidden');
+      } else {
+        emptyState.classList.add('hidden');
+
+        cartState.items.forEach((item, index) => {
+          totalCount += item.quantity;
+          const itemCost = item.price * item.quantity;
+          itemsSubtotal += itemCost;
+
+          const row = document.createElement('div');
+          row.className = "bg-yellow-50 border-2 border-black rounded-xl p-3 flex items-center justify-between shadow-brutal-sm";
+          row.innerHTML = `
+            <div class="flex-1 pr-2">
+              <h4 class="font-black text-xs text-black leading-tight">${item.name}</h4>
+              <div class="text-[10px] font-mono text-slate-600 mt-0.5">
+                $${item.price.toFixed(2)} × ${item.quantity} = <strong class="text-black">$${itemCost.toFixed(2)}</strong>
+              </div>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <!-- Cursed Duplicate Button disguised as Remove -->
+              <button onclick="cursedDuplicateItem(${index})" class="bg-white hover:bg-blinkRed text-black hover:text-white px-2 py-1 rounded-md border border-black font-extrabold text-[10px] transition" title="Delete Item">
+                🗑️
+              </button>
+            </div>
+          `;
+          container.appendChild(row);
+        });
+      }
+
+      badge.textContent = totalCount;
+
+      // Calculate Fees
+      const emotionalComp = 14.50;
+      const oxygenFee = 0.99;
+      const rainFee = 6.40;
+      const feltLikeItFee = 9.99;
+      const grandTotal = itemsSubtotal + emotionalComp + oxygenFee + rainFee + feltLikeItFee + cartState.extraFees + cartState.promoPenalty;
+
+      document.getElementById('fee-subtotal').textContent = `$${itemsSubtotal.toFixed(2)}`;
+      document.getElementById('fee-grand-total').textContent = `$${grandTotal.toFixed(2)}`;
+    }
+
+    // Cursed button: Remove Item DUPLICATES the item!
+    function cursedDuplicateItem(index) {
+      sound.playPop();
+      const item = cartState.items[index];
+      item.quantity *= 2;
+      showToast(`CLONED! You cannot delete ${item.name}. Quantity doubled to ${item.quantity}!`, 'error');
+      triggerMascotMock(`Bro tried to delete an item! ${item.name} is now your legal dependent.`);
+      updateCartDisplay();
+    }
+
+    // View Cart Trigger: Loud Buzzer + Meme Flash Overlay (Extended Taunting Period)
+    let memeFlashTimeout = null;
+    let memeCountdownInterval = null;
+
+    document.getElementById('view-cart-btn').addEventListener('click', () => {
+      sound.playBuzzer();
+      const overlay = document.getElementById('meme-flash-overlay');
+      const countdownEl = document.getElementById('meme-countdown-seconds');
+      overlay.style.display = 'flex';
+
+      // Clear any prior active timers
+      if (memeFlashTimeout) clearTimeout(memeFlashTimeout);
+      if (memeCountdownInterval) clearInterval(memeCountdownInterval);
+
+      let timeLeft = 6; // Increased time (6 seconds of glorious mocking)
+      if (countdownEl) countdownEl.textContent = timeLeft;
+
+      memeCountdownInterval = setInterval(() => {
+        timeLeft--;
+        if (countdownEl) countdownEl.textContent = timeLeft;
+        if (timeLeft === 4) sound.playLaugh();
+        if (timeLeft === 2) sound.playBoing();
+        if (timeLeft <= 0) {
+          clearInterval(memeCountdownInterval);
+        }
+      }, 1000);
+
+      memeFlashTimeout = setTimeout(() => {
+        clearInterval(memeCountdownInterval);
+        overlay.style.display = 'none';
+        toggleCartDrawer(true);
+      }, 6000);
+    });
+
+    function dismissMemeFlash() {
+      if (memeFlashTimeout) clearTimeout(memeFlashTimeout);
+      if (memeCountdownInterval) clearInterval(memeCountdownInterval);
+      document.getElementById('meme-flash-overlay').style.display = 'none';
+      toggleCartDrawer(true);
+    }
+
+    function toggleCartDrawer(open) {
+      const drawer = document.getElementById('cart-drawer');
+      const backdrop = document.getElementById('cart-backdrop');
+      if (open) {
+        drawer.classList.remove('translate-x-full');
+        backdrop.classList.remove('hidden');
+      } else {
+        drawer.classList.add('translate-x-full');
+        backdrop.classList.add('hidden');
+      }
+    }
+
+    // Cursed Promo Code
+    function applyCursedPromo() {
+      const input = document.getElementById('promo-code-input');
+      const code = input.value.trim().toUpperCase();
+      const status = document.getElementById('promo-status');
+      const penaltyRow = document.getElementById('promo-penalty-row');
+
+      if (!code) {
+        showToast('Please type a coupon code so we can charge you for it.', 'info');
+        return;
+      }
+
+      sound.playBuzzer();
+      cartState.promoPenalty = 35.00;
+      status.textContent = `Coupon '${code}' applied: +$35.00 Audacity Surcharge attached.`;
+      status.classList.remove('hidden');
+      penaltyRow.classList.remove('hidden');
+      updateCartDisplay();
+      showToast(`Promo accepted: Added $35.00 fee for having the nerve to ask for a discount.`, 'error');
+    }
+
+    // Windows Blue Screen of Death (BSOD) Overlay on Clear Cart
+    function triggerBSOD() {
+      sound.playBuzzer();
+      toggleCartDrawer(false);
+      const bsod = document.getElementById('bsod-modal');
+      const counter = document.getElementById('bsod-counter');
+      bsod.style.display = 'block';
+
+      let count = 0;
+      const interval = setInterval(() => {
+        count += Math.floor(Math.random() * 25) + 15;
+        if (count >= 100) {
+          count = 100;
+          clearInterval(interval);
+          setTimeout(() => {
+            bsod.style.display = 'none';
+            showToast('BLINKEET.SYS recovered. Your cart was NOT cleared.', 'info');
+          }, 800);
+        }
+        counter.textContent = count;
+      }, 600);
+    }
+
+    /* ==========================================================================
+       8. CHECKOUT NIGHTMARE: EXISTENTIAL VEGGIE CAPTCHA & 99.99% ETERNAL SPINNER
+       ========================================================================== */
+    const existentialVeggies = [
+      { emoji: "🥦", quote: "Ponders the void between refrigerator shelves", dread: true },
+      { emoji: "🍅", quote: "Accepts inevitable pureeing with somber stoicism", dread: true },
+      { emoji: "🥕", quote: "Happy and well-adjusted root vegetable", dread: false },
+      { emoji: "🥔", quote: "Questions whether eyes can truly see darkness", dread: true },
+      { emoji: "🍆", quote: "Just wants to go to brunch", dread: false },
+      { emoji: "🧅", quote: "Crying from internal philosophical torment", dread: true },
+      { emoji: "🌽", quote: "Overstimulated by the collective conscious", dread: true },
+      { emoji: "🥒", quote: "Excited about pickle transformation", dread: false },
+      { emoji: "🧄", quote: "Stares at ceiling at 3:42 AM listening to Smiths", dread: true }
+    ];
+
+    function startCheckoutNightmare() {
+      toggleCartDrawer(false);
+      sound.playBuzzer();
+      openCaptchaModal();
+    }
+
+    function openCaptchaModal() {
+      const modal = document.getElementById('captcha-modal');
+      const grid = document.getElementById('captcha-grid');
+      grid.innerHTML = '';
+
+      existentialVeggies.forEach((veg, idx) => {
+        const item = document.createElement('div');
+        item.className = "captcha-item border-2 border-black rounded-xl p-2 text-center cursor-pointer hover:bg-yellow-100 transition select-none flex flex-col items-center justify-between";
+        item.dataset.dread = veg.dread;
+        item.onclick = function() {
+          sound.playPop();
+          this.classList.toggle('bg-blinkYellow');
+          this.classList.toggle('border-blinkDarkGreen');
+        };
+        item.innerHTML = `
+          <div class="text-3xl mb-1">${veg.emoji}</div>
+          <div class="text-[9px] font-bold text-slate-700 leading-tight">${veg.quote}</div>
+        `;
+        grid.appendChild(item);
+      });
+
+      modal.classList.remove('hidden');
+    }
+
+    function refreshCaptcha() {
+      sound.playBoing();
+      openCaptchaModal();
+      showToast('New existential quandaries loaded.', 'info');
+    }
+
+    function submitCaptchaVerification() {
+      sound.playSadWah();
+      document.getElementById('captcha-modal').classList.add('hidden');
+      // Always fail or proceed to eternal offshore spinner
+      showToast('CAPTCHA failed: Broccoli experienced seasonal depression, not existential dread.', 'error');
+      setTimeout(() => {
+        openEternalTransferModal();
+      }, 700);
+    }
+
+    function openEternalTransferModal() {
+      const modal = document.getElementById('transfer-modal');
+      modal.classList.remove('hidden');
+      sound.playLaugh();
+
+      const waitEl = document.getElementById('wait-time-text');
+      const years = ["74 years", "148 years", "654 millennia", "Infinite Planck times"];
+      let idx = 0;
+      setInterval(() => {
+        idx = (idx + 1) % years.length;
+        if (waitEl) waitEl.textContent = `${years[idx]}, 4 months`;
+      }, 2000);
+    }
+
+    function abortTransfer() {
+      document.getElementById('transfer-modal').classList.add('hidden');
+      sound.playBuzzer();
+      showToast('Transfer aborted: $99.00 cancellation convenience penalty billed.', 'error');
+      triggerMascotMock("Bro gave up at 99.99%! We were literally 12 decades away from completion!");
+    }
+
+    /* ==========================================================================
+       9. MR. BLINKEE: THE MOCKING MASCOT WITH RUNAWAY CLOSE & MITOSIS CLONING
+       ========================================================================== */
+    const savageQuotes = [
+      "Skill issue detected. Can't even buy coriander?",
+      "Bro thought he was getting groceries in 10 mins 💀",
+      "L + Ratio + Out of Stock + Cash on Delivery disabled",
+      "Why are you still trying? Look at you.",
+      "Our delivery rider saw your address and joined a monastery.",
+      "Bro clicked 'ADD' like that was actually gonna work 😂",
+      "Your cart grand total exceeds your entire generational wealth.",
+      "Imagine waiting 10 minutes when you could simply starve in peace.",
+      "Your card was declined for: 'Insufficient Vibe'.",
+      "We dispatched your milk via carrier pigeon. Good luck."
+    ];
+
+    function triggerMascotMock(customText) {
+      sound.playLaugh();
+      const bubble = document.getElementById('mr-blinkee-bubble');
+      const quoteEl = document.getElementById('mr-blinkee-quote');
+      
+      const quote = customText || savageQuotes[Math.floor(Math.random() * savageQuotes.length)];
+      quoteEl.textContent = `"${quote}"`;
+
+      bubble.classList.remove('hidden');
+      bubble.classList.add('animate-bounce');
+    }
+
+    function pokeMascot(e) {
+      sound.playLaugh();
+      triggerMascotMock();
+      const x = (e && e.clientX) ? e.clientX : window.innerWidth - 60;
+      const y = (e && e.clientY) ? e.clientY : window.innerHeight - 60;
+      explodeTrash(x, y);
+    }
+
+    // Dodge Close Button
+    function dodgeCloseButton(btn) {
+      sound.playBoing();
+      const randX = (Math.random() - 0.5) * 120;
+      const randY = (Math.random() - 0.5) * 80;
+      btn.style.transform = `translate(${randX}px, ${randY}px)`;
+    }
+
+    // Mitosis: If clicked, spawns 2 clones!
+    function cloneMascotMitosis(btn) {
+      sound.playLaugh();
+      showToast('MITOSIS TRIGGERED! Mr. Blinkee duplicated!', 'error');
+      
+      const clonesArea = document.getElementById('mascot-clones-area');
+      for (let i = 0; i < 2; i++) {
+        const clone = document.createElement('div');
+        clone.className = "fixed z-50 bg-blinkYellow border-3 border-black rounded-2xl p-3 shadow-brutal text-xs font-black animate-bounce pointer-events-auto flex items-center gap-2";
+        clone.style.bottom = `${Math.random() * 60 + 10}vh`;
+        clone.style.left = `${Math.random() * 60 + 10}vw`;
+        clone.innerHTML = `
+          <span class="text-3xl">🛍️</span>
+          <div>
+            <div class="text-[9px] uppercase">CLONE #${Math.floor(Math.random()*900+100)}</div>
+            <div>HAHAHAHA! 💀</div>
+          </div>
+        `;
+        clone.onclick = () => {
+          sound.playLaugh();
+          showToast('Clone cannot be stopped!', 'error');
+        };
+        clonesArea.appendChild(clone);
+      }
+    }
+
+    // Unprovoked periodic mocking every 22 seconds
+    setInterval(() => {
+      triggerMascotMock();
+    }, 22000);
+
+    /* ==========================================================================
+       10. EMERGENCY SANITY TOGGLE (TURBO RAGE MODE)
+       ========================================================================== */
+    let sanityBroken = false;
+    function toggleEmergencySanity() {
+      sanityBroken = !sanityBroken;
+      sound.playBuzzer();
+
+      if (sanityBroken) {
+        document.body.classList.add('turbo-earthquake');
+        document.getElementById('sanity-toggle-btn').innerHTML = '🔥 OVERCLOCKING CHAOS (RUN!)';
+        showToast('SANITY RESET FAILED: TURBO RAGE MODE ENGAGED. THERE IS NO ESCAPE.', 'error');
+        
+        // Massive confetti explosion
+        for (let i = 0; i < 30; i++) {
+          setTimeout(() => {
+            explodeTrash(Math.random() * window.innerWidth, Math.random() * window.innerHeight);
+          }, i * 50);
+        }
+
+        // Laugh track rapid fire
+        sound.playLaugh();
+      } else {
+        document.body.classList.remove('turbo-earthquake');
+        document.getElementById('sanity-toggle-btn').innerHTML = '🛠️ EMERGENCY SANITY TOGGLE (FIX UI)';
+        showToast('Temporary ceasefire declared. Reality stabilized slightly.', 'info');
+      }
+    }
+
+    function triggerQuickChaos() {
+      sound.playBuzzer();
+      const events = [
+        () => document.body.classList.toggle('screen-inverted'),
+        () => document.body.classList.toggle('screen-upside-down'),
+        () => triggerBSOD(),
+        () => triggerMascotMock("You rolled the dice of ruin and lost everything!"),
+        () => addMilkChaos(document.getElementById('dodging-milk-btn'))
+      ];
+      events[Math.floor(Math.random() * events.length)]();
+    }
+
+    function triggerChaosEvent(type) {
+      sound.playBoing();
+      showToast('Logo clicked: +$2.50 Curiosity Tax added to order.', 'warning');
+      cartState.extraFees += 2.50;
+      updateCartDisplay();
+    }
+
+    /* ==========================================================================
+       11. PARTICLES & TOAST NOTIFICATIONS
+       ========================================================================== */
+    function explodeTrash(x, y) {
+      const items = ['💀', '🤡', '🍅', '💸', '🥛', '💩', '🔥', '🩴'];
+      for (let i = 0; i < 12; i++) {
+        const p = document.createElement('div');
+        p.className = 'trash-particle';
+        p.textContent = items[Math.floor(Math.random() * items.length)];
+        p.style.left = `${x}px`;
+        p.style.top = `${y}px`;
+        const tx = (Math.random() - 0.5) * 300;
+        const ty = (Math.random() - 0.5) * 300 - 80;
+        const rot = (Math.random() - 0.5) * 720;
+        p.style.setProperty('--tx', `${tx}px`);
+        p.style.setProperty('--ty', `${ty}px`);
+        p.style.setProperty('--rot', `${rot}deg`);
+        document.body.appendChild(p);
+        setTimeout(() => p.remove(), 2200);
+      }
+    }
+
+    function showToast(message, type = 'info') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      
+      let borderCol = 'border-black';
+      let bgCol = 'bg-white';
+      let icon = '📢';
+
+      if (type === 'error') {
+        borderCol = 'border-black';
+        bgCol = 'bg-pink-100';
+        icon = '🚨';
+      } else if (type === 'warning') {
+        borderCol = 'border-black';
+        bgCol = 'bg-yellow-100';
+        icon = '⚠️';
+      } else if (type === 'success') {
+        borderCol = 'border-black';
+        bgCol = 'bg-green-100';
+        icon = '💀';
+      }
+
+      toast.className = `${bgCol} ${borderCol} border-3 rounded-2xl p-3 shadow-brutal text-xs font-black text-black pointer-events-auto flex items-start gap-2.5 transform translate-y-2 opacity-0 transition-all duration-200`;
+      toast.innerHTML = `
+        <span class="text-base flex-shrink-0">${icon}</span>
+        <div class="flex-1 leading-snug">${message}</div>
+      `;
+
+      container.appendChild(toast);
+      
+      requestAnimationFrame(() => {
+        toast.classList.remove('translate-y-2', 'opacity-0');
+      });
+
+      setTimeout(() => {
+        toast.classList.add('opacity-0', '-translate-y-2');
+        setTimeout(() => toast.remove(), 300);
+      }, 4000);
+    }
+
+    // Initial greeting
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        showToast('Welcome to BLINKEET! Delivery in 10 seconds or we send our deepest apologies.', 'info');
+      }, 800);
+    });
+  </script>
+</body>
+</html>
